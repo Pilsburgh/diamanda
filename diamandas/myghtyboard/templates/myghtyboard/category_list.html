@@ -1,0 +1,50 @@
+{% extends "body.html" %}
+{% load i18n %}
+{% load pyif %}
+
+{% block title %}{{ siteName }} {% trans "Discussion Forum" %}{% endblock %}
+{% block header %}{% trans "Discussion Forum" %}{% endblock %}
+{% block description %}{% trans "Discussion Forum for " %}{{ siteName }}{% trans "where you can ask for help, or feedback on your projects. To post on forum you have to login." %}{% endblock %}
+
+{% block meta %}<link rel="stylesheet" href="/site_media/static/forum.css" type="text/css" />{% endblock %}
+{% block crumb %}<a href="/">{% trans "Home" %}</a> > <a href="{% url diamandas.myghtyboard.views.category_list %}">{% trans "Forum Index" %}</a>{% endblock %}
+
+{% block fullmenu %}
+<li><a href="{% url diamandas.myghtyboard.views.category_list %}">{% trans "Back to Forum" %}</a></li>
+<li><a href="{% url diamandas.myghtyboard.views.last_topic_list %}">{% trans "Last Active Topics" %}</a></li>
+<li><a href="{% url diamandas.myghtyboard.views.my_topic_list %}/">{% trans "My Topics" %}</a></li>
+<li><a href="{% url diamandas.myghtyboard.views.my_posttopic_list %}">{% trans "My Posts" %}</a></li>{% endblock %}
+
+{% block content %}
+{% for cat in categories %}
+          <table>
+            <tr>
+            <th style="width:20px;"></th>
+              <th><strong>{{ cat.name }}</strong></th>
+              <th style="width:30px;"><strong>{% trans "Topics" %}</strong></th>
+              <th style="width:30px;"><strong>{% trans "Posts" %}</strong></th>
+              <th style="width:200px;"><strong>{% trans "Last Post" %}</strong></th>
+            </tr>
+            {% for forum in cat.forums %}
+            <tr class="small">
+              <td>{% pyif user.get_profile.last_visit < forum.modification_date %}
+                    <img src="/site_media/static/img/forum/new.png" alt="*" />
+                    {% else %}
+                    <img src="/site_media/static/img/forum/normal.png" alt="*" />
+                    {% endif %}</td>
+              <td style="text-align:left;">
+                    <a href="{% url diamandas.myghtyboard.views.topic_list forum.id %}"><b>{{ forum.name }}</b></a><br />{{ forum.description }}
+              </td>
+              <td>{{ forum.topics }}</td>
+              <td>{{ forum.posts }}</td>
+              <td>{% ifnotequal forum.lastposter None %}{{ forum.lastposter }}, {{ forum.modification_date|date:"Y.m.d G:i" }}<br />{{ forum.lasttopic|safe }}{% else %}{% trans "No topics in this forum" %}{% endifnotequal %}</td>
+            </tr>
+	    {% endfor %}
+          </table>
+<br />
+	{% endfor %}
+
+
+<img src="/site_media/static/img/forum/new.png" alt="*" /> {% trans "New posts" %}<br />
+<img src="/site_media/static/img/forum/normal.png" alt="*" /> {% trans "No new posts" %}
+{% endblock %}

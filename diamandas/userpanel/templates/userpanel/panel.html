@@ -1,0 +1,32 @@
+{% extends "body.html" %}
+{% load i18n %}
+{% block content %}
+<br />
+<h2>{% trans "User Profile" %}</h2>
+{% if user.is_authenticated %}
+	<ul>
+	<li><a href="/user/logout/"><b>{% trans "Logout" %}</b></a></li>
+	<li><a href="/user/edit/"><b>{% trans "Edit Profile" %}</b></a></li>
+	<li><a href="/user/password_change/"><b>{% trans "Change Password" %}</b></a></li>
+	<li><a href="mailto:{{ admin_mail }}"><b>{% trans "Contact Site Admin" %}</b></a> {{ admin_mail }}</li>
+	</ul>
+
+	{% if o %}
+		<h4>{% trans "OpenIDs for this user account" %}</h4>
+		<ul>
+		{% for i in o %}
+			<li><b>{{ i.openid }}</b> - <a href="/user/delopenid/{{ i.id }}/">{% trans "remove openID" %}</a></li>
+		{% endfor %}
+		</ul>
+	{% endif %}
+{% else %}
+	<ul>
+	<li><a href="/user/login/"><b>{% trans "Login" %}</b></a></li>
+	<li><a href="/user/register/"><b>{% trans "Register" %}</b></a></li>
+	<li><a href="/user/password_reset/"><b>{% trans "Lost Password" %}</b></a></li>
+	<li><a href="mailto:{{ admin_mail }}"><b>{% trans "Contact Site Admin" %}</b></a> {{ admin_mail }}</li>
+	</ul>
+{% endif %}
+{% endblock %}
+{% block crumb %}<a href="/">{% trans "Home" %}</a> > <a href="/user/">{% trans "User Panel" %}</a>{% endblock %}
+{% block on_user %} id="current"{% endblock %}

@@ -1,0 +1,26 @@
+{% extends "body.html" %}
+{% load i18n %}
+{% block meta %}<link rel="stylesheet" href="/site_media/static/forum.css" type="text/css" />{% endblock %}
+{% block crumb %}<a href="/">{% trans "Home" %}</a> > <a href="{% url diamandas.myghtyboard.views.category_list %}">{% trans "Forum Index" %}</a> > <a href="{% url diamandas.myghtyboard.views.topic_list topic.forum.id %}">{{ topic.forum }}</a>{% endblock %}
+{% block content %}
+
+<br />
+<h2><span>{% trans "Move Topic" %}</span></h2>
+<div class="box">{% trans "Select a forum to which the topic " %}"<b>{{ topic.name }}</b>" {% trans "should be moved" %}:<br /><br />
+<div style="text-align:center;">
+<form method="post" action=".">{% csrf_token %}
+<select name="forum">
+{% for f in forums %}
+<option value="{{ f.id }}">{{ f.name }}</option>
+{% endfor %}
+</select>
+<input type="submit" value="{% trans "Move Topic" %}" />
+</form></div><br /></div>
+{% endblock %}
+
+
+{% block fullmenu %}
+<li><a href="{% url diamandas.myghtyboard.views.category_list %}">{% trans "Back to Forum" %}</a></li>
+<li><a href="{% url diamandas.myghtyboard.views.last_topic_list %}">{% trans "Last Active Topics" %}</a></li>
+<li><a href="{% url diamandas.myghtyboard.views.my_topic_list %}/">{% trans "My Topics" %}</a></li>
+<li><a href="{% url diamandas.myghtyboard.views.my_posttopic_list %}">{% trans "My Posts" %}</a></li>{% endblock %}

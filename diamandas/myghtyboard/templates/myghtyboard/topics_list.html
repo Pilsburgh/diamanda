@@ -1,0 +1,185 @@
+{% extends "body.html" %}
+{% load i18n %}
+{% load pyif %}
+{% block meta %}<link rel="stylesheet" href="/site_media/static/forum.css" type="text/css" />{% endblock %}
+{% block title %}{% trans "Topics from" %} "{{ forum.name }}"{% if page %}{% ifnotequal page 1 %} page {{ page }}{% endifnotequal %}{% endif %}{% endblock %}
+{% block header %}{% trans "Topics from" %} "{{ forum.name }}"{% endblock %}
+{% block description %}{% trans "Discussion Forum for " %}{{ siteName }} {% trans "category" %} {{ forum.name }}{% if page %}{% ifnotequal page 1 %} page {{ page }}{% endifnotequal %}{% endif %}. {% trans "Feel free to post in this category." %}{% endblock %}
+
+{% block crumb %}<a href="/">{% trans "Home" %}</a> > <a href="{% url diamandas.myghtyboard.views.category_list %}">{% trans "Forum Index" %}</a> > <a href="{% url diamandas.myghtyboard.views.topic_list forum.id %}">{{ forum.name }}</a>{% endblock %}
+{% block fullmenu %}
+<li><a href="{% url diamandas.myghtyboard.views.category_list %}">{% trans "Back to Forum" %}</a></li>
+<li><a href="{% url diamandas.myghtyboard.views.last_topic_list %}">{% trans "Last Active Topics" %}</a></li>
+<li><a href="{% url diamandas.myghtyboard.views.my_topic_list %}/">{% trans "My Topics" %}</a></li>
+<li><a href="{% url diamandas.myghtyboard.views.my_posttopic_list %}">{% trans "My Posts" %}</a></li>{% endblock %}
+
+{% block content %}
+          <table>
+            <tr>
+              <th style="width:20px;"></th>
+              <th><strong>{% trans "Topic" %}</strong></th>
+              <th style="width:15px;"><strong>{% trans "Posts" %}</strong></th>
+              <th style="width:15px;"><strong>{% trans "Author" %}</strong></th>
+              <th style="width:100px;"><strong>{% trans "Last Post" %}</strong></th>
+            </tr>
+            {% if pr %}
+                <tr class="small">
+                <td></td>
+                <td>
+                <strong>{% trans "Filter topics" %}: </strong>
+                <form action="./" method="post">{% csrf_token %}
+                {% for i in pr %}
+                    <input type="checkbox" name="prefix[]" value="{{ i.id }}" style="width:auto;"{% pyif i in prefixes %}checked="checked"{% endif %} /> {{ i.name }}
+                {% endfor %}
+                <input type="submit" value="{% trans "Filter" %}" id="prefixes_submit" />
+                <input type="button" value="{% trans "Clear" %}" id="prefixes_submit" onclick="location.assign('{% url diamandas.myghtyboard.views.topic_list forum.id %}');" />
+                </form>
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                </tr>
+            {% endif %}
+           {% for topic in object_list %}
+            <tr {% if topic.is_solved %}class="small_solved"{% else %}class="small"{% endif %}>
+            <td>
+            {% if topic.is_locked %}
+                    <img src="/site_media/static/img/forum/lock.png" alt="*" />
+            {% else %}
+                    {% if topic.is_sticky %}
+                            <img src="/site_media/static/img/forum/stick.png" alt="*" />
+                    {% else %}
+                            {% if topic.is_global %}
+                                    <img src="/site_media/static/img/forum/glob.png" alt="*" />
+                            {% else %}
+                                    {% pyif user.get_profile.last_visit < topic.modification_date %}
+                                        <img src="/site_media/static/img/forum/new.png" alt="*" />
+                                    {% else %}
+                                        <img src="/site_media/static/img/forum/normal.png" alt="*" />
+                                    {% endif %}
+                            {% endif%}
+                    {% endif%}
+            {% endif %}</td>
+                          <td style="text-align:left;">
+                                {% if topic.is_solved %}[{% trans "Solved" %}] {% endif %}<a href="{% url diamandas.myghtyboard.views.post_list topic.last_pagination_page topic.id %}{% pyif user.get_profile.last_visit < topic.modification_date %}#new{% endif %}"><strong>{% if forum.use_prefixes %}{{ topic.prefixes }} {% endif %}{{ topic.name }}</strong></a>
+                                {% if user.is_authenticated %}<p class="toptions">
+                                    {% pyif perms.is_staff or topic.author == current_user %}
+                                        {% if topic.is_solved %}
+						
+                                                <a href="{% url diamandas.myghtyboard.views_actions.unsolve_topic topic.id forum.id %}" class="unsolve">{% trans "Unsolve Topic" %}</a>
+                                            {% else %}
+                                                <a href="{% url diamandas.myghtyboard.views_actions.solve_topic topic.id forum.id %}"  class="solve">{% trans "Mark as solved" %}</a>
+                                        {% endif %}
+                                    {% endif %}
+                                    {% if perms.is_staff %}
+                                        [<a href="{% url diamandas.myghtyboard.views_actions.delete_topic topic.id forum.id %}" onclick="return confirm('{% trans "Delete this Topic and all Posts?" %}')">{% trans "Delete" %}</a>]
+                                        {% if topic.is_locked %}
+                                                [<a href="{% url diamandas.myghtyboard.views_actions.open_topic topic.id forum.id %}" onclick="return confirm('{% trans "Open This Topic?" %}')">{% trans "Unlock" %}</a>]
+                                        {% else %}
+                                                [<a href="{% url diamandas.myghtyboard.views_actions.close_topic topic.id forum.id %}" onclick="return confirm('{% trans "Close This Topic?" %}')">{% trans "Lock" %}</a>]
+                                        {% endif %}
+                                        {% ifnotequal topic.is_locked 1 %}
+                                        [<a href="{% url diamandas.myghtyboard.views_actions.move_topic topic.id forum.id %}">{% trans "Move" %}</a>]
+                                         {% endifnotequal %}
+                                    {% endif %}
+                                </p>
+                                {% endif %}
+                          </td>
+                          <td>{{ topic.posts }}</td>
+                          <td>{{ topic.author }}</td>
+                          <td>{{ topic.lastposter}}<br />{{topic.modification_date|date:"d.m.Y" }}</td>
+            </tr>
+	    {% endfor %}
+            {% ifnotequal pages 1 %}
+            <tr class="small">
+                <td></td>
+                <td><strong>{% trans "Pages: " %}</strong>
+                    {% for i in cnt %}
+                        [<a href="{% url diamandas.myghtyboard.views.topic_list forum.id i %}">{% ifequal i page %}<b>{{ i }}</b>{% else %}{{ i }}{% endifequal %}</a>]
+                    {% endfor %}
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            {% endifnotequal %}
+          </table>
+
+{% if not user.is_authenticated and not perms.add_topic %}<div style="float:right;padding:10px;font-weight:bold;"><a href="/user/login/?next={% url diamandas.myghtyboard.views.topic_list forum.id %}">{% trans "Login to start a topic" %}</a></div>{% endif %}
+
+<br style="clear:both;" />
+{% if perms.add_topic %}
+    <form method="post" action="{% url diamandas.myghtyboard.views_add_edit.add_topic forum.id %}">{% csrf_token %}
+    
+    <div class="postform">
+        <div class="posthead">{% trans "Add new topic" %}</div>
+        
+        <div class="leftpostform">
+		<strong>{% trans "Title" %}</strong>
+	</div>
+	<div class="rightpostform">	
+	      {{ form.name }}{% if form.name.errors %}<br />*** {{ form.name.errors|join:", " }}{% endif %}
+	</div>
+         {% if pr %}  
+          <div class="leftpostform">
+                  <strong>{% trans "Prefixes" %}</strong>
+          </div>
+          <div class="rightpostform">	
+                 {% for i in pr %}
+                    <input type="checkbox" name="prefix[]" value="{{ i.id }}" style="width:auto;" /> {{ i.name }} 
+                 {% endfor %}
+          </div>
+          {% endif %}
+	{% if not user.is_authenticated %}
+		<div class="leftpostform">
+			<strong>{% trans "Nick" %}</strong>
+		</div>
+		<div class="rightpostform">	
+			{{ form.nick }}{% if form.nick.errors %}<br />*** {{ form.nick.errors|join:", " }}{% endif %}
+		</div>
+	{% endif %}
+        <div class="leftpostform">
+		<strong>{% trans "Content" %}</strong>
+	</div>
+	<div class="rightpostform">
+		<a name="c"></a>
+	      <textarea name="text" rows="6" cols="60">{{ post_text }}</textarea>
+	      <div><b>{% trans "Available Tags" %}</b>: [b], [u], [i], [code]. [python], [php], [url], [img], [quote].<br />
+		{% trans "Use <b>[code] or [python], [php]</b> for code and config text pasting." %}</div>
+	</div>
+        {% if perms.is_staff %}
+            <div class="leftpostform"><strong>{% trans "Options" %}</strong>
+            </div>
+            <div class="rightpostform" id="checkboxes">	
+                   {{ form.is_sticky }} {% trans "Sticky" %}{% if form.is_sticky.errors %}<br />*** {{ form.is_sticky.errors|join:", " }}{% endif %}<br />
+                   {{ form.is_global }} {% trans "Global" %}{% if form.is_global.errors %}<br />*** {{ form.is_global.errors|join:", " }}{% endif %}
+            </div>
+        {% endif %}
+	
+	{% if form.recaptcha %}
+	  <div class="leftpostform">
+	    <style>
+	      #recaptcha_table tr
+	      {
+		height:auto;
+	      }
+	      </style>
+	  </div>
+	  <div class="rightpostform">	
+		  {{ form.recaptcha }}
+	  </div>
+	{% endif %}
+	
+	
+        <div class="leftpostform">
+	</div>
+	<div class="rightpostform">	
+                <input type="submit" value="{% trans "Add topic" %}" class="submit" />
+	</div>
+    </div>
+    </form>
+{% endif %}
+{% if perms.is_spam %}
+<div class="box">{% trans "To many anonymous posts. Login to post topics and new messages." %}</div>
+{% endif %}
+{% endblock %}

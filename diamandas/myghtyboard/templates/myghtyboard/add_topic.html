@@ -1,0 +1,79 @@
+{% extends "body.html" %}
+{% load i18n %}
+{% block meta %}<link rel="stylesheet" href="/site_media/static/forum.css" type="text/css" />{% endblock %}
+{% block crumb %}<a href="/">{% trans "Home" %}</a> > <a href="{% url diamandas.myghtyboard.views.category_list %}">{% trans "Forum Index" %}</a> > <a href="{% url diamandas.myghtyboard.views.topic_list forum.id %}">{{ forum.name }}</a>{% endblock %}
+
+{% block title %}{% trans "Add Topic:" %} {{ forum.name }}{% endblock %}
+{% block header %}{% trans "Add Topic:" %} {{ forum.name }}{% endblock %}
+{% block description %}{% trans "Add Topic:" %} {{ forum.name }}{% endblock %}
+{% block content %}
+<form method="post" action=".">{% csrf_token %}
+<div class="postform">
+        <div class="posthead">{% trans "Add new topic" %}</div>
+        <div class="leftpostform">
+		<strong>{% trans "Title" %}</strong>
+	</div>
+	<div class="rightpostform">	
+	      {{ form.name }}{% if form.name.errors %}<br />*** {{ form.name.errors|join:", " }}{% endif %}
+	</div>
+          {% if pr %}  
+          <div class="leftpostform">
+                  <strong>{% trans "Prefix" %}</strong>
+          </div>
+          <div class="rightpostform">	
+                 {% for i in pr %}
+                    <input type="checkbox" name="prefix[]" value="{{ i.id }}" style="width:auto;" /> {{ i.name }} 
+                 {% endfor %}
+          </div>
+          {% endif %}
+	{% if not user.is_authenticated %}
+		<div class="leftpostform">
+			<strong>{% trans "Nick" %}</strong>
+		</div>
+		<div class="rightpostform">	
+			{{ form.nick }}{% if form.nick.errors %}<br />*** {{ form.nick.errors|join:", " }}{% endif %}
+		</div>
+	{% endif %}
+        <div class="leftpostform">
+		<strong>{% trans "Content" %}</strong>
+	</div>
+	<div class="rightpostform">
+	      <textarea name="text" rows="6" cols="60">{{ post_text }}</textarea>
+                    {% if form.text.errors %}<br />*** {{ form.text.errors|join:", " }}{% endif %}
+                    <div><b>{% trans "Available Tags" %}</b>: [b], [u], [i], [code]. [python], [php], [url], [img], [quote]. {% trans "Use <b>[code] or [python], [php]</b> for code and config text pasting." %}</div>
+	</div>
+        {% if perms.is_staff %}
+            <div class="leftpostform"><strong>{% trans "Options" %}</strong>
+            </div>
+            <div class="rightpostform" id="checkboxes">	
+                   {{ form.is_sticky }} {% trans "Sticky" %}{% if form.is_sticky.errors %}<br />*** {{ form.is_sticky.errors|join:", " }}{% endif %}<br />
+                   {{ form.is_global }} {% trans "Global" %}{% if form.is_global.errors %}<br />*** {{ form.is_global.errors|join:", " }}{% endif %}
+            </div>
+        {% endif %}
+	{% if form.recaptcha %}
+	  <div class="leftpostform">
+		<style>
+	      #recaptcha_table tr
+	      {
+		height:auto;
+	      }
+	      </style>
+	  </div>
+	  <div class="rightpostform">	
+		  {{ form.recaptcha }}
+	  </div>
+	{% endif %}
+        <div class="leftpostform">
+	</div>
+	<div class="rightpostform">	
+                <input type="submit" value="{% trans "Add topic" %}" class="submit" />
+	</div>
+    </div>
+
+</form>
+{% endblock %}
+{% block fullmenu %}
+<li><a href="{% url diamandas.myghtyboard.views.category_list %}">{% trans "Back to Forum" %}</a></li>
+<li><a href="{% url diamandas.myghtyboard.views.last_topic_list %}">{% trans "Last Active Topics" %}</a></li>
+<li><a href="{% url diamandas.myghtyboard.views.my_topic_list %}/">{% trans "My Topics" %}</a></li>
+<li><a href="{% url diamandas.myghtyboard.views.my_posttopic_list %}">{% trans "My Posts" %}</a></li>{% endblock %}

@@ -1,0 +1,110 @@
+{% extends "body.html" %}
+{% load i18n %}
+{% load fbc %}
+{% load pyif %}
+{% block meta %}<link rel="stylesheet" href="/site_media/static/forum.css" type="text/css" />{% endblock %}
+{% block title %}{% trans "Discussion:" %} {{ topic.name }} [{% trans "Forum" %}: {{ forum_name }}{% if page %}{% ifnotequal page 1 %}; page {{ page }}{% endifnotequal %}{% endif %}]{% endblock %}
+{% block header %}{% trans "Discussion:" %} {{ topic.name }}{% endblock %}
+{% block description %}{% trans "Discussion Forum for " %}{{ siteName }} {% trans "category" %} {{ forum.name }} {% trans "topic" %} {{ topic.name }}{% if page %}{% ifnotequal page 1 %}; page {{ page }}{% endifnotequal %}{% endif %}. {% trans "Feel free to post in this topic." %}{% endblock %}
+
+
+{% block crumb %}<a href="/">{% trans "Home" %}</a> > <a href="{% url diamandas.myghtyboard.views.category_list %}">{% trans "Forum Index" %}</a> > <a href="{% url diamandas.myghtyboard.views.topic_list forum_id %}">{{ forum_name }}</a> > <a href="{% url diamandas.myghtyboard.views.post_list 1 topic.id %}">{{ topic.name }}</a>{% endblock %}
+
+{% block fullmenu %}
+<li><a href="{% url diamandas.myghtyboard.views.category_list %}">{% trans "Back to Forum" %}</a></li>
+<li><a href="{% url diamandas.myghtyboard.views.last_topic_list %}">{% trans "Last Active Topics" %}</a></li>
+<li><a href="{% url diamandas.myghtyboard.views.my_topic_list %}/">{% trans "My Topics" %}</a></li>
+<li><a href="{% url diamandas.myghtyboard.views.my_posttopic_list %}">{% trans "My Posts" %}</a></li>{% endblock %}
+
+{% block content %}
+<div id="feed">
+{% for i in object_list %}
+<dl>
+	<dt>{% pyif user.get_profile.last_visit < i.date %}<a name="new"></a>{% endif %}<b>{% if i.author_anonymous %}~<i>{% endif %}{{ i.author}}{% if i.author_anonymous %}</i>{% endif %}</b> napisał: <span>{{ i.date|date:"d F Y" }}, godzina {{ i.date|date:"G:i" }}</span></dt>
+	<dd>
+	<ul>
+		<li>
+		{{ i.text|fbc|safe|urlizetrunc:"60" }}
+		</li>
+		<li class="post2">
+			{% pyif perms.is_staff or is_author %}
+				{% if topic.is_solved %}
+					<a href="{% url diamandas.myghtyboard.views_actions.unsolve_topic topic.id forum_id %}" class="unsolve">{% trans "Unsolve Topic" %}</a>
+				{% else %}
+					<a href="{% url diamandas.myghtyboard.views_actions.solve_topic topic.id forum_id %}"  class="solve">{% trans "Mark as solved" %}</a>
+				{% endif %}
+			{% endif %}
+			{% if perms.add_post %}
+				{% if opened %}
+					[<a href="{% url diamandas.myghtyboard.views_add_edit.add_post topic.id i.id %}">{% trans "Reply with quote" %}</a>]
+				{% endif %}
+			{% endif %}
+			{% ifequal i.author current_user %}
+				{% if opened %}
+					{% if not i.author_anonymous %}
+						[<a href="{% url diamandas.myghtyboard.views_add_edit.edit_post i.id %}">{% trans "Edit this post" %}</a>]
+					{% endif %}
+				{% endif %}
+			{% else %}
+				{% if perms.is_staff %}
+					[<a href="{% url diamandas.myghtyboard.views_add_edit.edit_post i.id %}">{% trans "Edit this post" %}</a>]
+				{% endif %}
+			{% endifequal %}
+			{% if perms.is_staff %}
+				[<a href="{% url diamandas.myghtyboard.views_actions.delete_post i.id topic.id %}" onclick="return confirm('{% trans "Delete This Post?" %}')">{% trans "Delete this post" %}</a>]
+			{% endif %}
+		</li>
+	</ul>
+	</dd>
+</dl>
+{% endfor %}
+</div>
+
+{% ifnotequal pages 1 %}
+<div class="box">
+<strong>{% trans "Pages: " %}</strong>
+{% for i in cnt %}
+	[<a href="{% url diamandas.myghtyboard.views.post_list i topic.id %}">{% ifequal i page %}<b>{{ i }}</b>{% else %}{{ i }}{% endifequal %}</a>]
+{% endfor %}
+</div>
+{% endifnotequal %}
+
+{% if perms.add_post and opened %}
+<form method="post" action="{% url diamandas.myghtyboard.views_add_edit.add_post topic.id %}">{% csrf_token %}
+<div class="postform">
+        <div class="posthead">{% trans "Add new post" %}</div>
+	
+	{% if not user.is_authenticated %}
+		<div class="leftpostform">
+			<strong>{% trans "Nick" %}</strong>
+		</div>
+		<div class="rightpostform">	
+			{{ form.nick }}{% if form.nick.errors %}<br />*** {{ form.nick.errors|join:", " }}{% endif %}
+		</div>
+	{% endif %}
+
+        <div class="leftpostform">
+		<strong>{% trans "Content" %}</strong>
+	</div>
+	<div class="rightpostform">
+		<a name="c"></a>
+	      <textarea name="text" rows="6" cols="60">{{ text }}</textarea>
+		<div><b>{% trans "Available Tags" %}</b>: [b], [u], [i], [code]. [python], [php], [url], [img], [quote].<br />
+		{% trans "Use <b>[code] or [python], [php]</b> for code and config text pasting." %}</div>
+	</div>
+        <div class="leftpostform">
+	</div>
+	<div class="rightpostform">	
+                <input type="submit" value="{% trans "Add post" %}" class="submit" />
+	</div>
+    </div>
+</form>
+{% else %}
+	{% if not user.is_authenticated and not perms.add_post %}<div style="float:right;padding:10px;font-weight:bold;"><a href="/user/login/?next=/forum/topic/1/{{ topic.id }}/">{% trans "Login to reply" %}</a></div>{% endif %}
+{% endif %}
+
+{% if perms.is_spam %}
+<div class="box">{% trans "To many anonymous posts. Login to post topics and new messages." %}</div>
+{% endif %}
+
+{% endblock %}

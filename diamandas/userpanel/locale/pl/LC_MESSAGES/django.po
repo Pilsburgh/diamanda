@@ -1,0 +1,663 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: userpanel\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-09-05 19:59+0200\n"
+"PO-Revision-Date: 2006-04-08 12:19+0900\n"
+"Last-Translator: Piotr Maliński <riklaunim@gmail.com>\n"
+"Language-Team: Polish <translation-team-pl@lists.sourceforge.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: views.py:67 views.py:73 views.py:79
+msgid "Incorrect answer."
+msgstr "Błędna odpowiedź."
+
+#: views.py:88 views.py:150 views.py:151
+msgid "Passwords do not match."
+msgstr "Hasła nie zgadzają się."
+
+#: views.py:95 views.py:146 views.py:147
+msgid "Login already taken"
+msgstr "Logij już zajęty"
+
+#: views.py:102 views.py:148 views.py:149
+msgid "Email already taken"
+msgstr "Email zajęty"
+
+#: views.py:139
+msgid "Registration compleated. You have been logged in succesfuly."
+msgstr "Rejestracja zakończona. Zostałeś zalogowany pomyślnie."
+
+#: views.py:144 views.py:145
+msgid "Incorrect answer"
+msgstr "Błędna odpowiedź"
+
+#: views.py:198 views.py:212
+msgid "You have been logged-in successfully :)"
+msgstr "Zostałeś zalogowany pomyślnie :)"
+
+#: views.py:202
+msgid ""
+"You have been logged-in successfully. You can set your email address in "
+"account preferences :) "
+msgstr ""
+"Zostałeś zalogowany pomyślnie. Możesz podać swój adres emaul w "
+"edycji profilu :)"
+
+#: views.py:239 templates/userpanel/login.html:17
+msgid "Username"
+msgstr "Nazwa użytkownika"
+
+#: views.py:240 templates/userpanel/register.html:13
+#: templates/userpanel/assign_rpx.html:12 templates/userpanel/login.html:18
+msgid "Password"
+msgstr "Hasło"
+
+#: views.py:265
+msgid "You have been connected to the existing account :)"
+msgstr "Zostałeś połączony z istniejącym kontem :)"
+
+#: captcha.py:30 captcha.py:37
+msgid "What's the "
+msgstr "Jaka jest "
+
+#: captcha.py:30
+#, python-format
+msgid " digit in %s?"
+msgstr " cyfra w %s?"
+
+#: captcha.py:37
+#, python-format
+msgid " character in %s?"
+msgstr " litera w %s?"
+
+#: models.py:50 models.py:66
+msgid "User"
+msgstr "Użytkownik"
+
+#: models.py:51
+msgid "Identifier"
+msgstr "Identyfikator"
+
+#: models.py:52
+msgid "No email specified"
+msgstr "Brak emailu"
+
+#: models.py:53
+msgid "Account made by social source"
+msgstr "Konto społecznościowe"
+
+#: models.py:59
+msgid "RPX Association"
+msgstr "Powiązanie RPX"
+
+#: models.py:60
+msgid "RPX Associations"
+msgstr "Powiązania RPX"
+
+#: models.py:67
+msgid "OpenID"
+msgstr "OpenID"
+
+#: models.py:73
+msgid "OpenID association"
+msgstr "Powiązanie OpenID"
+
+#: models.py:74
+msgid "OpenID associations"
+msgstr "Powiązania OpenID"
+
+#: templates/userpanel/panel.html:5
+msgid "User Profile"
+msgstr "Profil Użytkownika"
+
+#: templates/userpanel/panel.html:8
+msgid "Logout"
+msgstr "Wyloguj"
+
+#: templates/userpanel/panel.html:9
+msgid "Edit Profile"
+msgstr "Edytuj Profil"
+
+#: templates/userpanel/panel.html:10
+#: templates/userpanel/password_change_done.html:4
+#: templates/userpanel/password_change.html:4
+#: templates/userpanel/password_change.html:14
+msgid "Change Password"
+msgstr "Zmień Hasło"
+
+#: templates/userpanel/panel.html:11 templates/userpanel/panel.html.py:27
+msgid "Contact Site Admin"
+msgstr "Kontakt z Adminem"
+
+#: templates/userpanel/panel.html:15
+msgid "OpenIDs for this user account"
+msgstr "OpenID dla tego użytkownika"
+
+#: templates/userpanel/panel.html:18
+msgid "remove openID"
+msgstr "usuń OpenID"
+
+#: templates/userpanel/panel.html:24 templates/userpanel/edit_user_data.html:8
+#: templates/userpanel/register.html:9 templates/userpanel/assign_rpx.html:8
+#: templates/userpanel/login.html:19
+msgid "Login"
+msgstr "Login"
+
+#: templates/userpanel/panel.html:25 templates/userpanel/register.html:4
+#: templates/userpanel/register.html:7
+msgid "Register"
+msgstr "Rejestracja"
+
+#: templates/userpanel/panel.html:26
+msgid "Lost Password"
+msgstr "Zapomniane Hasło"
+
+#: templates/userpanel/panel.html:31
+#: templates/userpanel/password_reset_complete.html:15
+#: templates/userpanel/password_change_done.html:7
+#: templates/userpanel/password_reset_done.html:13
+#: templates/userpanel/password_change.html:19
+#: templates/userpanel/password_reset_confirm.html:31
+#: templates/userpanel/password_reset_form.html:17
+#: templates/userpanel/edit_user_data.html:22
+#: templates/userpanel/register.html:36 templates/userpanel/assign_rpx.html:22
+#: templates/userpanel/login.html:30
+msgid "Home"
+msgstr "Strona Główna"
+
+#: templates/userpanel/panel.html:31
+#: templates/userpanel/password_reset_complete.html:15
+#: templates/userpanel/password_change_done.html:7
+#: templates/userpanel/password_reset_done.html:13
+#: templates/userpanel/password_change.html:19
+#: templates/userpanel/password_reset_confirm.html:31
+#: templates/userpanel/password_reset_form.html:17
+#: templates/userpanel/edit_user_data.html:22
+#: templates/userpanel/register.html:36 templates/userpanel/assign_rpx.html:22
+#: templates/userpanel/login.html:30
+msgid "User Panel"
+msgstr "Panel Użytkownika"
+
+#: templates/userpanel/password_reset_complete.html:4
+#: templates/userpanel/password_reset_complete.html:8
+msgid "Password reset complete"
+msgstr "Resetowanie hasła zakończone"
+
+#: templates/userpanel/password_reset_complete.html:10
+msgid "Your password has been set.  You may go ahead and log in now."
+msgstr "Twoje hasło zostało zmienione. Możesz już się zalogować."
+
+#: templates/userpanel/password_reset_complete.html:12
+msgid "Log in"
+msgstr "Zaloguj Się"
+
+#: templates/userpanel/password_change_done.html:5
+msgid "Password have been changed succesfuly"
+msgstr "Hasło zmienione pomyślnie"
+
+#: templates/userpanel/password_change_done.html:5
+msgid "Go to Main Page"
+msgstr "Przejdź do Głównej Strony"
+
+#: templates/userpanel/password_reset_done.html:4
+#: templates/userpanel/password_reset_done.html:8
+msgid "Password reset successful"
+msgstr "Hasło zresetowane pomyślnie"
+
+#: templates/userpanel/password_reset_done.html:10
+msgid ""
+"We've e-mailed you instructions for setting your password to the e-mail "
+"address you submitted. You should be receiving it shortly."
+msgstr ""
+"Wysłaliśmy na twój adres email instrukcje dotyczące zmiany hasła. Niebawem "
+"powinna pojawić się w twojej skrzynce."
+
+#: templates/userpanel/password_change.html:6
+msgid ""
+"There was a problem with password change. Did you entered correct current "
+"password?"
+msgstr "Wystąpił błąd ze zmianą hasła. Czy podałeś poprawne obecne hasło?"
+
+#: templates/userpanel/password_change.html:11
+msgid "Current Password"
+msgstr "Obecne Hasło"
+
+#: templates/userpanel/password_change.html:12
+msgid "New Password"
+msgstr "Nowe Hasło"
+
+#: templates/userpanel/password_change.html:13
+msgid "New Password again"
+msgstr "Nowe Hasło ponownie"
+
+#: templates/userpanel/password_reset_confirm.html:4
+#: templates/userpanel/password_reset_form.html:3
+#: templates/userpanel/password_reset_form.html:7
+msgid "Password reset"
+msgstr "Resetowanie Hasła"
+
+#: templates/userpanel/password_reset_confirm.html:10
+msgid "Enter new password"
+msgstr "Podaj Nowe hasło"
+
+#: templates/userpanel/password_reset_confirm.html:12
+msgid ""
+"Please enter your new password twice so we can verify you typed it in "
+"correctly."
+msgstr "Podaj nowe hasło dwa razy."
+
+#: templates/userpanel/password_reset_confirm.html:16
+msgid "New password:"
+msgstr "Nowe hasło:"
+
+#: templates/userpanel/password_reset_confirm.html:18
+msgid "Confirm password:"
+msgstr "Powtórz Hasło:"
+
+#: templates/userpanel/password_reset_confirm.html:19
+msgid "Change my password"
+msgstr "Zmień moje hasło"
+
+#: templates/userpanel/password_reset_confirm.html:24
+msgid "Password reset unsuccessful"
+msgstr "Błąd resetowania haslamsgstr"
+
+#: templates/userpanel/password_reset_confirm.html:26
+msgid ""
+"The password reset link was invalid, possibly because it has already been "
+"used.  Please request a new password reset."
+msgstr ""
+"Link resetowania hasła jest niepoprawny. Może to być spowodowane "
+"wykorzystaniem wygenerowanego linka."
+
+#: templates/userpanel/password_reset_email.html:2
+msgid "You're receiving this e-mail because you requested a password reset"
+msgstr "Otrzymujesz tą wiadomość ponieważ użyłeś opcji resetowania hasła"
+
+#: templates/userpanel/password_reset_email.html:3
+#, python-format
+msgid "for your user account at %(site_name)s"
+msgstr "dla twojego konta na %(site_name)s"
+
+#: templates/userpanel/password_reset_email.html:5
+msgid "Please go to the following page and choose a new password:"
+msgstr "Proszę udać się na podaną stronę i wybrać nowe hasło:"
+
+#: templates/userpanel/password_reset_email.html:9
+msgid "Your username, in case you've forgotten:"
+msgstr "Twój login, dla przypomnienia to:"
+
+#: templates/userpanel/password_reset_email.html:11
+msgid "Thanks for using our site!"
+msgstr "---"
+
+#: templates/userpanel/password_reset_email.html:13
+#, python-format
+msgid "The %(site_name)s team"
+msgstr "---"
+
+#: templates/userpanel/password_reset_form.html:9
+msgid ""
+"Forgotten your password? Enter your e-mail address below, and we'll e-mail "
+"instructions for setting a new one."
+msgstr ""
+"Zapomniałeś hasła? Podaj adres e-mail, a wyślemy instrukcje dotyczące zmiany "
+"hasła."
+
+#: templates/userpanel/password_reset_form.html:13
+msgid "E-mail address:"
+msgstr "Adres E-mail:"
+
+#: templates/userpanel/password_reset_form.html:13
+msgid "Reset my password"
+msgstr "Zresetuj Hasło"
+
+#: templates/userpanel/edit_user_data.html:6
+msgid "Edit your data"
+msgstr "Edytuj swoje dane"
+
+#: templates/userpanel/edit_user_data.html:12
+#: templates/userpanel/register.html:21
+msgid "Email"
+msgstr "Email"
+
+#: templates/userpanel/edit_user_data.html:17
+msgid "Save Changes"
+msgstr "Zapisz Zmiany"
+
+#: templates/userpanel/register.html:17
+msgid "Password Again"
+msgstr "Hasło Ponownie"
+
+#: templates/userpanel/register.html:25
+msgid "What's the answer?"
+msgstr "Jaka jest odpowiedź?"
+
+#: templates/userpanel/register.html:31
+msgid "Register My"
+msgstr "Zarejestruj Mnie"
+
+#: templates/userpanel/assign_rpx.html:6
+msgid "Use old account with social login"
+msgstr "Użyj starego konta z logowaniem przez serwis społecznościowy"
+
+#: templates/userpanel/assign_rpx.html:17
+msgid "Assign Account"
+msgstr "Przypisz Konto"
+
+#: templates/userpanel/login.html:4
+msgid ""
+"As a registered user you will have full access to comments and forum. "
+"Registration isn't however required to browse this site content."
+msgstr ""
+"Jako zarejestrowany użytkownik będziesz miał pełen dostęp do forum i "
+"komentarzy. Rejestracja nie jest wymagana do przeglądania zawartości strony."
+
+#: templates/userpanel/login.html:6
+msgid "If you are a new user you can"
+msgstr "Jeżeli jesteś nowym użytkownikiem możesz"
+
+#: templates/userpanel/login.html:6
+msgid "register"
+msgstr "zarejestrować się"
+
+#: templates/userpanel/login.html:6
+msgid "using a simple form"
+msgstr "używając prostego formularza"
+
+#: templates/userpanel/login.html:7
+msgid "If you forgotten your password, then you can"
+msgstr "Jeżeli zapomniałeś hasła, to możesz"
+
+#: templates/userpanel/login.html:7
+msgid "reset it"
+msgstr "je zresetować"
+
+#: templates/userpanel/login.html:11
+msgid "Your username and password didn't match. Please try again."
+msgstr "Login i hasło nie pasują. Spróbuj ponownie"
+
+#: templates/userpanel/login.html:16
+msgid "Standard login"
+msgstr "Zwykłe logowanie"
+
+#: templates/userpanel/login.html:24
+msgid "Instant login-register with no passwords"
+msgstr "Automatyczna rejestracja/logowanie bez haseł"
+
+#~ msgid "Bad OpenID ID."
+#~ msgstr "Błędny ID dla OpenID"
+
+#~ msgid "OpenID removed from list."
+#~ msgstr "OpenID usunięte z listy."
+
+#~ msgid "You just registered on http://www.%s using OpenID"
+#~ msgstr "Przed chwilą zarejestrowałeś się na http://www.%s używają OpenID"
+
+#~ msgid ""
+#~ "If you will want to remove login by OpenID then you will have to use your "
+#~ "password: %s (which can be changed after login)."
+#~ msgstr ""
+#~ "Jeżeli chcesz usunąć logowanie poprzez OpenID, to będziesz potrzebował "
+#~ "swojego hasła: %s (które można zmienić po logowaniu)."
+
+#~ msgid "OpenID Registration Notification"
+#~ msgstr "Powiadomienie o rejestracji z OpenID"
+
+#~ msgid ""
+#~ "Registration compleated. To login on this site use your OpenID. You have "
+#~ "been logged in succesfuly."
+#~ msgstr ""
+#~ "Rejestracja zakończona. By zalogować się na konto wystarczy użyć OpenID. "
+#~ "Zostałeś zalogowany pomyślnie."
+
+#~ msgid "OpenID assigned to your user account."
+#~ msgstr "OpenID przypisane do twojego konta użytkownika."
+
+#, fuzzy
+#~ msgid ""
+#~ "Registration compleated. To login on this site use the Facebook Sign In "
+#~ "Button. You have been logged in succesfuly."
+#~ msgstr ""
+#~ "Rejestracja zakończona. By zalogować się na konto wystarczy użyć "
+#~ "przycisku Facebook Sign In. Zostałeś zalogowany pomyślnie."
+
+#~ msgid "Facebook Account assigned to your user account."
+#~ msgstr "Konto Facebook przypisane do twojego konta użytkownika."
+
+#~ msgid "Facebook ID"
+#~ msgstr "ID Facebooka"
+
+#~ msgid "Facebook association"
+#~ msgstr "Powiązanie Facebook"
+
+#~ msgid "Facebook associations"
+#~ msgstr "Powiązania Facebook"
+
+#, fuzzy
+#~ msgid "Assign Facebook with existing user account"
+#~ msgstr "Przypisz OpenID do istniejącego konta"
+
+#~ msgid "Quick registration for"
+#~ msgstr "Szybka rejestracja dla"
+
+#, fuzzy
+#~ msgid ""
+#~ "Fill in this form to get features of a full user account. You will be "
+#~ "automatically logged in when you use your Facebook Account. No extra "
+#~ "passwords! :)"
+#~ msgstr ""
+#~ "Wypełnij ten formularz by uzyskać możliwości zwykłego konta, na które "
+#~ "będziesz automatycznie logowany. Bez dodatkowych haseł! :)"
+
+#, fuzzy
+#~ msgid ""
+#~ "If you already have an account on this site you can assign this Facebook "
+#~ "Account with your site account using"
+#~ msgstr ""
+#~ "Jeżeli masz już konto na tej stronie to możesz przypisać do niego OpenID "
+#~ "za pomocą"
+
+#~ msgid "simple login form"
+#~ msgstr "prostego formularza logowania"
+
+#~ msgid ""
+#~ "Fill in this form to get features of a full user account. You will be "
+#~ "automatically logged in when you use your openID. No extra passwords! :)"
+#~ msgstr ""
+#~ "Wypełnij ten formularz by uzyskać możliwości zwykłego konta, na które "
+#~ "będziesz automatycznie logowany. Bez dodatkowych haseł! :)"
+
+#~ msgid ""
+#~ "If you already have an account on this site you can assign this OpenID "
+#~ "with your account using"
+#~ msgstr ""
+#~ "Jeżeli masz już konto na tej stronie to możesz przypisać do niego OpenID "
+#~ "za pomocą"
+
+#~ msgid "Facebook"
+#~ msgstr "Facebook"
+
+#~ msgid "Assign openID with existing user account"
+#~ msgstr "Przypisz OpenID do istniejącego konta"
+
+#~ msgid "You just registered on http://www.%s using Facebook Account"
+#~ msgstr ""
+#~ "Przed chwilą zarejestrowałeś się na http://www.%s używają Konta Facebook"
+
+#~ msgid ""
+#~ "If you will want to login directly (not with your FB account) then you "
+#~ "will have to use your password: %s (which can be changed after login)."
+#~ msgstr ""
+#~ "Jeżeli będziesz chciał zalogować swojego hasła: %s (które można zmienić "
+#~ "po logowaniu)."
+
+#, fuzzy
+#~ msgid "Registration Notification"
+#~ msgstr "Powiadomienie o rejestracji z OpenID"
+
+#~ msgid ""
+#~ "There was a problem with password reset. Did you entered correct email "
+#~ "address?"
+#~ msgstr ""
+#~ "Wystąpił błąd z resetowaniem hasła. Czy podałeś poprawny adres email?"
+
+#~ msgid "Email used on registration"
+#~ msgstr "Adres email podany przy rejestracji"
+
+#~ msgid "You requested password reset on"
+#~ msgstr "Zarządałeś zresetowania hasła na"
+
+#~ msgid "Captcha Error."
+#~ msgstr "Błąd Captcha."
+
+#~ msgid "Login to short"
+#~ msgstr "Za krótki login"
+
+#~ msgid "Password to short"
+#~ msgstr "Za krótkie hasło"
+
+#~ msgid "This user doesn't want to receive any messages"
+#~ msgstr "Ten użytkownik nie chce otrzymywać wiadomości"
+
+#~ msgid "ROTFL LOL OMG CSS :)"
+#~ msgstr "ROTFL LOL OMG CSS :)"
+
+#~ msgid "Your new password on rk.edu.pl sites is: "
+#~ msgstr "Twoje nowe hasło w serwisach rk.edu.pl to: "
+
+#~ msgid "To short"
+#~ msgstr "Za krótkie"
+
+#~ msgid "Login Error - bad login and/or password"
+#~ msgstr "Błąd Logowania - zły login i/lub hasło"
+
+#~ msgid "A email with the new password has been send."
+#~ msgstr "Email wraz z nowym hasłem został wysłany."
+
+#~ msgid "Forgotten Password"
+#~ msgstr "Zapomniane Hasło"
+
+#~ msgid "Messages Settings"
+#~ msgstr "Ustawienia Wiadomości-Emaili"
+
+#~ msgid "Send a Private Message"
+#~ msgstr "Wyślij Wiadomość"
+
+#~ msgid "Subject"
+#~ msgstr "Temat"
+
+#~ msgid "Text"
+#~ msgstr "Treść"
+
+#~ msgid "Send Message"
+#~ msgstr "Wyślij Wiadomość"
+
+#~ msgid "required, more than 3 chars<br />letters or numbers"
+#~ msgstr "wymagane, więcej niż 3 znaki<br />litery lub liczby"
+
+#~ msgid "required, more than 4 chars<br />letters or numbers"
+#~ msgstr "wymagane, więcej niż 4 znaki<br />litery lub liczby"
+
+#~ msgid "required, enter the same password"
+#~ msgstr "wymagane, wprowadź to samo hasło"
+
+#~ msgid "required, your email addres"
+#~ msgstr "wymagane, podaj swój adres email"
+
+#~ msgid "Text from the image"
+#~ msgstr "Tekst z grafiki"
+
+#~ msgid "Users List"
+#~ msgstr "Lista Użytkowników"
+
+#~ msgid "Actions"
+#~ msgstr "Akcje"
+
+#~ msgid "Allow messages from users"
+#~ msgstr "Zezwól na wiadomości od użytkowników"
+
+#~ msgid "Save"
+#~ msgstr "Zapisz"
+
+#~ msgid "Change Forgotten Password"
+#~ msgstr "Zmień Zapomniane Hasło"
+
+#~ msgid "Your Login"
+#~ msgstr "Twój Login"
+
+#~ msgid "Your Registration Email"
+#~ msgstr "Email z rejestracji"
+
+#~ msgid "(Use CAPITAL letters)"
+#~ msgstr "(Użyj DUŻYCH liter)"
+
+#~ msgid "Permission Denied"
+#~ msgstr "Brak Dostępu"
+
+#~ msgid "No such profile"
+#~ msgstr "Brak profilu użytkownika"
+
+#~ msgid "Public Email"
+#~ msgstr "Publiczny Email"
+
+#~ msgid "Public Informations"
+#~ msgstr "Publiczne Informacje"
+
+#~ msgid "Allowed HTML Tags"
+#~ msgstr "Dozwolone tagi HTML"
+
+#~ msgid "Signature"
+#~ msgstr "Podpis"
+
+#~ msgid "Contacts"
+#~ msgstr "Kontakty"
+
+#~ msgid "Log Out"
+#~ msgstr "Wyloguj"
+
+#~ msgid "User Topics"
+#~ msgstr "Tematy Użytkownika"
+
+#~ msgid "User Posts"
+#~ msgstr "Posty Użytkownika"
+
+#~ msgid "Public Info"
+#~ msgstr "Publiczne Informacje"
+
+#~ msgid "Show Profile"
+#~ msgstr "Pokaż Profil"
+
+#~ msgid "- You can set pages as current"
+#~ msgstr "- Twoje zmiany będą od razu widoczne na stronie"
+
+#~ msgid "- You can't set pages as current"
+#~ msgstr ""
+#~ "- Wprowadzone przez ciebie zmiany pojawią się na stronie po zatwierdzeniu "
+#~ "przez administratora"
+
+#~ msgid "- You can add pages"
+#~ msgstr "- Możesz dodawać nowe strony"
+
+#~ msgid "- You can't add pages"
+#~ msgstr "- Nie możesz dodawać stron"
+
+#~ msgid "- You can edit pages"
+#~ msgstr "- Możesz edytować strony"
+
+#~ msgid "- You can't edit pages"
+#~ msgstr "- Nie możesz edytować stron"
+
+#~ msgid "REGISTER FORM"
+#~ msgstr "REJESTRACJA"
+
+#~ msgid "Is Staff"
+#~ msgstr "W Zespole"

@@ -1,0 +1,6 @@
+{% extends "body.html" %}
+{% load i18n %}
+
+{% block content %}
+<div class="msg"><p>{{ bug }}</p><p>{% trans "You can go to" %} <a href="/">{% trans "main page" %}</a>{% if not user.is_authenticated %}, {% trans "or login on this website using" %} <a href="/user/login/">{% trans "login form" %}</a>{% endif %}.</p></div>
+{% endblock %}

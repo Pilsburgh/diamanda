@@ -1,0 +1,90 @@
+
+#search_form
+{
+    display: none;
+}
+.navigation
+{
+    display: none;
+}
+.subnavigation
+{
+    display: none;
+}
+#comments_section
+{
+    display: none;
+}
+.content_aside
+{
+    display: none;
+}
+.footer_box
+{
+    display: none;
+}
+#aside_astrophotos
+{
+    display: none;
+}
+
+.container_12
+{
+    border:0px;
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+.primary
+{
+	box-shadow:none;
+	-webkit-box-shadow: none;
+
+}
+body
+{
+    background: none;
+}
+
+#header img
+{
+    display: none;
+}
+#header h1, #header h2
+{ 
+    margin: 0px;
+    padding: 0px;
+}
+
+#print_footer
+{
+    display: block;
+}
+#art_footer
+{
+    display: none;
+}
+.nine
+{
+    width: 100% !important;
+}
+.three
+{
+    display: none;
+}
+.nabgl
+{
+    display: none;
+}
+.show-on-desktops
+{
+    display: none !important;
+}
+aside
+{
+    display: none;
+}
+.container
+{
+    border: 0px;
+}

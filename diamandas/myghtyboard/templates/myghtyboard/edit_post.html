@@ -1,0 +1,35 @@
+{% extends "body.html" %}
+{% load i18n %}
+{% load fbc %}
+{% block meta %}<link rel="stylesheet" href="/site_media/static/forum.css" type="text/css" />{% endblock %}
+
+{% block crumb %}<a href="/">{% trans "Home" %}</a> > <a href="{% url diamandas.myghtyboard.views.category_list %}">{% trans "Forum Index" %}</a> > <a href="{% url diamandas.myghtyboard.views.topic_list forum.id %}">{{ forum.name }}</a> > <a href="{% url diamandas.myghtyboard.views.post_list topic.last_pagination_page topic.id %}">{{ topic.name }}</a>{% endblock %}
+
+{% block content %}
+<form method="post" action="{% url diamandas.myghtyboard.views_add_edit.edit_post post_id %}">{% csrf_token %}
+<div class="postform">
+        <div class="posthead">{% trans "Edit post" %}</div>
+        <div class="leftpostform">
+		<strong>{% trans "Content" %}</strong>
+	</div>
+	<div class="rightpostform">
+		<a name="c"></a>
+	      <textarea name="text" rows="6" cols="60">{{ text }}</textarea>
+                    {% if form.text.errors %}<br />*** {{ form.text.errors|join:", " }}{% endif %}
+                    <div><b>{% trans "Available Tags" %}</b>: [b], [u], [i], [code]. [python], [php], [url], [img], [quote]</div>
+	</div>
+        <div class="leftpostform">
+	</div>
+	<div class="rightpostform">	
+                <input type="submit" value="{% trans "Edit post" %}" class="submit" />
+	</div>
+    </div>
+</form>
+
+{% endblock %}
+
+{% block fullmenu %}
+<li><a href="{% url diamandas.myghtyboard.views.category_list %}">{% trans "Back to Forum" %}</a></li>
+<li><a href="{% url diamandas.myghtyboard.views.last_topic_list %}">{% trans "Last Active Topics" %}</a></li>
+<li><a href="{% url diamandas.myghtyboard.views.my_topic_list %}/">{% trans "My Topics" %}</a></li>
+<li><a href="{% url diamandas.myghtyboard.views.my_posttopic_list %}">{% trans "My Posts" %}</a></li>{% endblock %}

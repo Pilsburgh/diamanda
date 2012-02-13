@@ -1,0 +1,43 @@
+{% extends "body.html" %}
+{% load i18n %}
+{% block meta %}<link rel="stylesheet" href="/site_media/static/forum.css" type="text/css" />{% endblock %}
+{% block crumb %}<a href="/">{% trans "Home" %}</a> > <a href="{% url diamandas.myghtyboard.views.category_list %}">{% trans "Forum Index" %}</a>{% endblock %}
+{% block content %}
+          <table>
+            <tr>
+              <th style="width:20px;"></th>
+              <th>{% trans "Topic" %}</th>
+              <th style="width:90px;">{% trans "Author" %}</th>
+              <th style="width:15px;">{% trans "Posts" %}</th>
+              <th style="width:150px;">{% trans "Last Post" %}</th>
+            </tr>
+            {% for topic in topics %}
+            <tr class="small">
+           <td>
+            {% if topic.is_locked %}
+                    <img src="/site_media/static/img/forum/lock.png" alt="*" />
+            {% else %}
+                    {% if topic.is_sticky %}
+                            <img src="/site_media/static/img/forum/stick.png" alt="*" />
+                    {% else %}
+                            {% if topic.is_global %}
+                                    <img src="/site_media/static/img/forum/glob.png" alt="*" />
+                            {% else %}
+                                    <img src="/site_media/static/img/forum/normal.png" alt="*" />
+                            {% endif %}
+                    {% endif %}
+            {% endif %}</td>
+                          <td style="text-align:left;"><a href="{% url diamandas.myghtyboard.views.post_list topic.last_pagination_page topic.id %}">{{ topic.name }}</a></td>
+                          <td>{{ topic.author }}</td>
+                          <td>{{ topic.posts }}</td>
+                          <td>{{ topic.lastposter }}, {{topic.modification_date|date:"d.m.Y" }}</td>
+            </tr>
+	    {% endfor %}
+          </table>
+{% endblock %}
+
+{% block fullmenu %}
+<li><a href="{% url diamandas.myghtyboard.views.category_list %}">{% trans "Back to Forum" %}</a></li>
+<li><a href="{% url diamandas.myghtyboard.views.last_topic_list %}">{% trans "Last Active Topics" %}</a></li>
+<li><a href="{% url diamandas.myghtyboard.views.my_topic_list %}/">{% trans "My Topics" %}</a></li>
+<li><a href="{% url diamandas.myghtyboard.views.my_posttopic_list %}">{% trans "My Posts" %}</a></li>{% endblock %}

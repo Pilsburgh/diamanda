@@ -1,0 +1,76 @@
+{% extends "body.html" %}
+{% load i18n %}
+{% load fbc %}
+{% block meta %}<link rel="stylesheet" href="/site_media/static/forum.css" type="text/css" />{% endblock %}
+{% block title %}{% trans "Add Post:" %} {{ topic.name }}{% endblock %}
+{% block header %}{% trans "Add Post:" %} {{ topic.name }}{% endblock %}
+{% block description %}{% trans "Add Post:" %} {{ topic.name }}{% endblock %}
+
+{% block crumb %}<a href="/">{% trans "Home" %}</a> > <a href="{% url diamandas.myghtyboard.views.category_list %}">{% trans "Forum Index" %}</a> > <a href="{% url diamandas.myghtyboard.views.topic_list forum.id %}">{{ forum.name }}</a> > <a href="{% url diamandas.myghtyboard.views.post_list topic.last_pagination_page topic.id %}">{{ topic.name }}</a>{% endblock %}
+
+{% block content %}
+<form method="post" action="{% url diamandas.myghtyboard.views_add_edit.add_post topic.id %}">{% csrf_token %}
+<div class="postform">
+        <div class="posthead">{% trans "Add new post" %}</div>
+	{% if not user.is_authenticated %}
+		<div class="leftpostform">
+			<strong>{% trans "Nick" %}</strong>
+		</div>
+		<div class="rightpostform">	
+			{{ form.nick }}{% if form.nick.errors %}<br />*** {{ form.nick.errors|join:", " }}{% endif %}
+		</div>
+	{% endif %}
+        <div class="leftpostform">
+		<strong>{% trans "Content" %}</strong>
+	</div>
+	<div class="rightpostform">
+	      <textarea name="text" rows="6" cols="60">{% if text %}{{ text }}{% else %}{{ quote_text }}{% endif %}</textarea>
+                    {% if form.text.errors %}<br />*** {{ form.text.errors|join:", " }}{% endif %}
+			<div><b>{% trans "Available Tags" %}</b>: [b], [u], [i], [code]. [python], [php], [url], [img, [quote]. {% trans "Use <b>[code] or [python], [php]</b> for code and config text pasting." %}</div>
+	</div>
+	{% if form.recaptcha %}
+	  <div class="leftpostform">
+		<style>
+	      #recaptcha_table tr
+	      {
+		height:auto;
+	      }
+	      </style>
+	  </div>
+	  <div class="rightpostform">	
+		  {{ form.recaptcha }}
+	  </div>
+	{% endif %}
+        <div class="leftpostform">
+	</div>
+	<div class="rightpostform">	
+                <input type="submit" value="{% trans "Add post" %}" class="submit" />
+	</div>
+    </div>
+</form>
+
+
+<h2>{% trans "Last 10 posts from topic" %}</h2>
+{% if lastpost %}
+
+{% for i in lastpost %}
+	<div class="post">
+		    <div class="posthead">{{ i.date|date:"d.m.Y" }}</div>
+		    <div class="leftpost">
+			      <strong>{{ i.author}}</strong>
+		    </div>
+		    <div class="rightpost">
+			      {{ i.text|fbc|safe|urlizetrunc:"60" }}
+		    </div>
+	</div>
+	<br />
+	{% endfor %}
+
+{% endif %}
+{% endblock %}
+
+{% block fullmenu %}
+<li><a href="{% url diamandas.myghtyboard.views.category_list %}">{% trans "Back to Forum" %}</a></li>
+<li><a href="{% url diamandas.myghtyboard.views.last_topic_list %}">{% trans "Last Active Topics" %}</a></li>
+<li><a href="{% url diamandas.myghtyboard.views.my_topic_list %}/">{% trans "My Topics" %}</a></li>
+<li><a href="{% url diamandas.myghtyboard.views.my_posttopic_list %}">{% trans "My Posts" %}</a></li>{% endblock %}
