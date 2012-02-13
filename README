@@ -1,0 +1,9 @@
+MyghtyBoard - a django forum application
+
+This is a basic, but usable forum application that can be used in your project.
+
+You can test it as is - just launch the dev server (login/pass for admin is forum/forum)
+
+Piotr Malinski
+http://www.rkblog.rk.edu.pl
+riklaunim@gmail.com
